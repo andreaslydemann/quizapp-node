@@ -12,7 +12,7 @@ app.use(express.static(__dirname + '/public'));
 // remove when angular is added
 app.set('views', __dirname + '/app/views');
 app.set('view engine', 'jade');
-app.use('/', api); // delete when angular is added
+app.use('/', api);
 
 app.use('/api', api);
 

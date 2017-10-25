@@ -1,5 +1,7 @@
+#!/usr/bin/env node
 require('dotenv').config();
 require('./app/db');
+
 const app = require('./app');
 const debug = require('debug')('start-a-quiz:server');
 const http = require('http');
