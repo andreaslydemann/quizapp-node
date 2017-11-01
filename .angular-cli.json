@@ -20,6 +20,7 @@
       "prefix": "app",
       "styles": [
         "assets/stylesheets/bootstrap.css",
+        "assets/stylesheets/font-awesome.css",
         "assets/stylesheets/styles.css"
       ],
       "scripts": [],
