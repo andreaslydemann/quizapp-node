@@ -1,9 +1,8 @@
 #!/usr/bin/env node
 require('dotenv').config();
-require('./db/mongoose');
-const path = require('path');
+require('./app/db/mongoose');
 const bodyParser = require('body-parser');
-const api = require('./routes');
+const api = require('./app/routes');
 const express = require('express');
 const app = express();
 const http = require('http');
@@ -12,11 +11,11 @@ const server = http.createServer(app);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static(path.resolve(__dirname + '/../dist')));
+app.use(express.static(__dirname + '/dist'));
 
 app.use('/api', api);
 app.all('*', function(req, res) {
-    //res.status(200).sendFile(path.resolve(__dirname + '/../dist/index.html')); // Angular
+    res.status(200).sendFile(__dirname + '/dist/index.html');
 });
 
 server.on('error', function onError(error) {

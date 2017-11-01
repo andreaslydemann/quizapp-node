@@ -4,11 +4,16 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "node app/server.js",
+    "start": "node server.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "heroku-postbuild": "ng build --aot --prod"
+  },
+  "engines": {
+    "node": "8.7.0",
+    "npm": "5.5.1"
   },
   "private": true,
   "dependencies": {
@@ -30,7 +35,6 @@
     "mongodb": "^2.2.33",
     "mongoose": "^4.12.5",
     "morgan": "~1.9.0",
-    "path": "^0.12.7",
     "rxjs": "^5.5.2",
     "zone.js": "^0.8.18"
   },
