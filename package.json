@@ -29,7 +29,6 @@
     "@angular/platform-browser-dynamic": "^4.4.6",
     "@angular/router": "^4.4.6",
     "body-parser": "~1.18.2",
-    "bootstrap": "^3.3.7",
     "core-js": "^2.5.1",
     "debug": "~2.6.9",
     "dotenv": "^4.0.0",
