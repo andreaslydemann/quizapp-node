@@ -7,8 +7,9 @@ const schema = new Schema({
         required: true,
         trim: true
     },
-    description: {
-        type: String,
+    difficulty: {
+        type: Number,
+        required: true,
         trim: true,
     },
     questions: [{
@@ -17,4 +18,4 @@ const schema = new Schema({
     }]
 });
 
-module.exports = mongoose.model('Category', schema);
+module.exports = mongoose.model('Quiz', schema);
