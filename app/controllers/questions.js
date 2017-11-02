@@ -2,7 +2,7 @@ const Question = require('../models/question');
 
 const timeout = process.env.API_DELAY;
 
-function createQuestion (req, res) {
+function createQuestion(req, res) {
     setTimeout(() => {
 
         const question = new Question(req.body);
@@ -13,7 +13,7 @@ function createQuestion (req, res) {
     }, timeout)
 }
 
-function readQuestions (req, res) {
+function readQuestions(req, res) {
     setTimeout(() => {
 
         Question.find({})
@@ -23,7 +23,7 @@ function readQuestions (req, res) {
     }, timeout)
 }
 
-function updateQuestion (req, res) {
+function updateQuestion(req, res) {
     setTimeout(() => {
 
         Question.findByIdAndUpdate(req.params.id, req.body)
@@ -33,7 +33,7 @@ function updateQuestion (req, res) {
     }, timeout)
 }
 
-function deleteQuestion (req, res) {
+function deleteQuestion(req, res) {
     setTimeout(() => {
 
         Question.findByIdAndRemove(req.params.id)

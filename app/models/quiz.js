@@ -7,10 +7,10 @@ const schema = new Schema({
         required: true,
         trim: true
     },
-    difficulty: {
-        type: Number,
+    description: {
+        type: String,
         required: true,
-        trim: true,
+        trim: true
     },
     questions: [{
         type: Schema.Types.ObjectId,

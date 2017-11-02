@@ -10,11 +10,11 @@ const port = (process.env.PORT || 3000);
 const server = http.createServer(app);
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(__dirname + '/dist'));
 
 app.use('/api', api);
-app.all('*', function(req, res) {
+app.all('*', function (req, res) {
     res.status(200).sendFile(__dirname + '/dist/index.html');
 });
 

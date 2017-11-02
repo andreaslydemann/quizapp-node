@@ -2,7 +2,7 @@ const Quiz = require('../models/quiz');
 
 const timeout = process.env.API_DELAY;
 
-function createQuiz (req, res) {
+function createQuiz(req, res) {
     setTimeout(() => {
 
         const quiz = new Quiz(req.body);
@@ -13,7 +13,7 @@ function createQuiz (req, res) {
     }, timeout)
 }
 
-function readQuizzes (req, res) {
+function readQuizzes(req, res) {
     setTimeout(() => {
 
         Quiz.find({})
@@ -24,7 +24,7 @@ function readQuizzes (req, res) {
     }, timeout)
 }
 
-function updateQuiz (req, res) {
+function updateQuiz(req, res) {
     setTimeout(() => {
 
         Quiz.findByIdAndUpdate(req.params.id, req.body)
@@ -34,7 +34,7 @@ function updateQuiz (req, res) {
     }, timeout)
 }
 
-function deleteQuiz (req, res) {
+function deleteQuiz(req, res) {
     setTimeout(() => {
 
         Quiz.findByIdAndRemove(req.params.id)

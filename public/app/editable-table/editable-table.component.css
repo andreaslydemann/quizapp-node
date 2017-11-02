@@ -1,0 +1,30 @@
+.ui.table {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.myerror {
+    color: red
+}
+
+.requiredInput.divmessage {
+    display: none
+}
+
+.requiredInput.divmessage.show {
+    display: block !important
+}
+
+.requiredInput.divmessage.hide {
+    display: none
+}
+
+.table-bordered > thead > tr > th,
+.table-bordered > tbody > tr > td,
+.table-bordered > tfoot > tr > th{
+    border-left: 0 !important;
+    border-right: 0 !important;
+}
+
+tfoot, thead {
+    background-color: #f9fafb;
+}
