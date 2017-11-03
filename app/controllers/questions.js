@@ -1,4 +1,5 @@
 const Question = require('../models/question');
+const Quiz = require('../models/quiz');
 
 const timeout = process.env.API_DELAY;
 
@@ -16,9 +17,13 @@ function createQuestion(req, res) {
 function readQuestions(req, res) {
     setTimeout(() => {
 
-        Question.find({})
+        Quiz.findById(req.params.id).select('questions -_id').populate('questions')
             .then((questions) => res.status(200).json(questions))
             .catch((err) => res.status(404).send())
+/*
+        Question.find({})
+            .then((questions) => res.status(200).json(questions))
+            .catch((err) => res.status(404).send())*/
 
     }, timeout)
 }

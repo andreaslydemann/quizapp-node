@@ -3,7 +3,7 @@ const router = express.Router();
 const questions = require('./controllers/questions');
 const quizzes = require('./controllers/quizzes');
 
-router.get('/questions', questions.readQuestions);
+router.get('/questions/:id', questions.readQuestions);
 router.post('/questions', questions.createQuestion);
 router.put('/questions/:id', questions.updateQuestion);
 router.delete('/questions/:id', questions.deleteQuestion);

@@ -9,13 +9,13 @@
     <tr class="{{trClass}}" *ngFor="let row of service.tableRowsObjects">
         <td class="{{tdClass}}" *ngFor="let cell of row.cells">
                     <span *ngIf="service.isEditing.indexOf(row) === -1 && service.checkTypeOf(cell.content) !== 'boolean'">
-                      {{cell.content}}
+                      {{cell.content.length > 90 ? (cell.content | slice:0:90) + '...' : cell.content}}
                     </span>
             <span *ngIf="service.isEditing.indexOf(row) === -1 && service.checkTypeOf(cell.content) == 'boolean'">
                       {{cell.content ? 'True' : 'False'}}
             </span>
             <span *ngIf="!(service.isEditing.indexOf(row) == -1) && !cell.isEditable">
-                      {{cell.content}}
+                       {{cell.content.length > 90 ? (cell.content | slice:0:90) + '...' : cell.content}}
             </span>
             <div class="ui input" *ngIf="!(service.isEditing.indexOf(row) == -1) && service.checkTypeOf(cell.content) !== 'boolean' &&
             !isRequired">
@@ -57,6 +57,10 @@
                     (click)="deleteRow(row)">
                 <i class="{{deleteIcon}}"></i>{{cancelButtonLabel}}
             </button>
+            <button class="btn btn-xs btn-success" *ngIf="(service.isEditing.indexOf(row) === -1)
+            && canEditRows && !hideExtraButton" (click)="extraButtonClick(row)">
+                <i class="{{addIcon}}"></i> {{extraButtonLabel}}
+            </button>
         </td>
     </tr>
     </tbody>
@@ -64,8 +68,8 @@
     <tr>
         <th *ngFor="let title of service.tableHeadersObjects"></th>
         <th *ngIf="canEditRows||canDeleteRows">
-            <button class="btn btn-xs btn-success pull-right" (click)="addRow()" *ngIf="canAddRows">
-                <i class="{{addIcon}}"></i>{{addButtonLabel}}
+            <button class="btn btn-xs btn-default pull-right" (click)="addRow()" *ngIf="canAddRows">
+                <i class="{{addIcon}}"></i> {{addButtonLabel}}
             </button>
         </th>
     </tr>

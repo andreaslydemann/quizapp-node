@@ -6,13 +6,15 @@ import {MyQuizzesComponent} from './my-quizzes/my-quizzes.component';
 import {AllQuizzesComponent} from './all-quizzes/all-quizzes.component';
 
 import {QuizzesRouting} from "./quizzes.routing";
-import { EditableTableModule } from '../editable-table/editable-table.module';
+import {EditableTableModule} from '../editable-table/editable-table.module';
+import {QuestionsModule} from "../questions/questions.module";
 
 @NgModule({
     imports: [
         CommonModule,
         EditableTableModule,
         RouterModule,
+        QuestionsModule,
         QuizzesRouting
     ],
     declarations: [MyQuizzesComponent, AllQuizzesComponent]

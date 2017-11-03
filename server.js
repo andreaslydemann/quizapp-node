@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 require('dotenv').config();
 require('./app/db/mongoose');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const api = require('./app/routes');
 const express = require('express');
@@ -9,6 +10,7 @@ const http = require('http');
 const port = (process.env.PORT || 3000);
 const server = http.createServer(app);
 
+app.use(cors);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(__dirname + '/dist'));

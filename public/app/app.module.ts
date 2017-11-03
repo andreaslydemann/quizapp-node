@@ -1,8 +1,8 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {RouterModule} from "@angular/router";
 
 import {QuizzesModule} from './quizzes/quizzes.module';
+import {QuestionsModule} from './questions/questions.module';
 
 import {AppComponent} from './app.component';
 import {NavBarComponent} from './navbar/navbar.component';
@@ -14,11 +14,12 @@ import {AppRouting} from './app.routing';
     declarations: [
         AppComponent,
         NavBarComponent,
-        NotFoundComponent,
+        NotFoundComponent
     ],
     imports: [
         BrowserModule,
         QuizzesModule,
+        QuestionsModule,
         AppRouting
     ],
     bootstrap: [AppComponent]

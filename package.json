@@ -30,6 +30,7 @@
     "@angular/router": "^4.4.6",
     "body-parser": "~1.18.2",
     "core-js": "^2.5.1",
+    "cors": "^2.8.4",
     "debug": "~2.6.9",
     "dotenv": "^4.0.0",
     "express": "~4.15.5",

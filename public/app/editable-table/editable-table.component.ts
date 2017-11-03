@@ -18,8 +18,10 @@ export class EditableTableComponent implements OnInit {
     @Input('can-delete-rows') canDeleteRows = true;
     @Input('can-edit-rows') canEditRows = true;
     @Input('can-add-rows') canAddRows = true;
+    @Input('hide-extra-button') hideExtraButton = false;
 
     @Input('add-button-label') addButtonLabel: string;
+    @Input('extra-button-label') extraButtonLabel: string;
     @Input('edit-button-label') editButtonLabel: string;
     @Input('save-button-label') saveButtonLabel: string;
     @Input('cancel-button-label') cancelButtonLabel: string;
@@ -47,6 +49,7 @@ export class EditableTableComponent implements OnInit {
 
     @Output() onSave = new EventEmitter<any>();
     @Output() onRemove = new EventEmitter<any>();
+    @Output() onExtraButtonClick = new EventEmitter<any>();
 
     service: EditableTableService;
 
@@ -103,5 +106,9 @@ export class EditableTableComponent implements OnInit {
 
             this.onRemove.emit(obj);
         }
+    }
+
+    extraButtonClick(selectedRow: TableRow){
+        this.onExtraButtonClick.emit(selectedRow.id);
     }
 }

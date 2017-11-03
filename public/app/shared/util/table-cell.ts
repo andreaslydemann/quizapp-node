@@ -5,7 +5,7 @@ export class TableCell {
     constructor(content: any, isEditable?: boolean) {
         this.content = content;
 
-        if(isEditable !== null)
+        if(isEditable != undefined)
             this.isEditable = isEditable;
         else
             this.isEditable = true;

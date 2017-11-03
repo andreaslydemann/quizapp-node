@@ -1,7 +1,10 @@
-<h2>
+<h3>
     Quizzes
-</h2>
+</h3>
 
-<nv-editable-table [table-headers]="tableHeaders" [table-rows-with-id]="tableRowsWithId" [data-type]="dataType"
-                   [is-editable]="isEditable" class="ui table">
+<nv-editable-table [table-headers]="tableHeaders" [table-rows-with-id]="tableRowsWithId"
+                   [data-type]="dataType" [is-editable]="isEditable" [add-button-label]="quiz"
+                   [extra-button-label]="questions" (onExtraButtonClick)="showQuestions($event)">
 </nv-editable-table>
+
+<my-questions *ngIf="selectedQuiz" [quiz-id]="selectedQuiz"></my-questions>
