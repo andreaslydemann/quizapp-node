@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {QuizService} from "../quiz.service";
 
 @Component({
     selector: 'my-quizzes',
@@ -7,35 +8,71 @@ import {Component, OnInit} from '@angular/core';
 })
 export class MyQuizzesComponent implements OnInit {
     quizzes: any[];
-    quiz = "Quiz";
-    questions = "Questions";
-    selectedQuiz: number;
+    quizLabel = "Quiz";
+    questionsLabel = "Questions";
+    selectedQuiz: number = 0;
 
+    tableRowsWithId: any[][] = [];
     tableHeaders = ['Name', 'Description', 'Question Count'];
-
-    tableRowsWithId: any[][] = [
-        ['59f9d1d0f32d4817f2232a51', "Science quiz", "This quiz is about science", 5],
-        [2, "Math quiz", "This quiz is about math", 5]
-    ];
-
     dataType = ['string', 'string', 'number'];
     isEditable = [true, true, false];
 
-    // as argument: private _service: quizService
-    constructor() {
+    constructor(private service: QuizService) {
     }
 
     ngOnInit() {
-        /*this._service.getQuizzes()
-            .subscribe(quizzes => this.quizzes = quizzes);*/
-        this.quizzes = [{id: 1, name: "Science quiz", description: "This quiz is about science", difficulty: 5},
-            {id: 2, name: "Math quiz", description: "This quiz is about math", difficulty: 5}]
+        this.setTableRows();
     }
 
-    showQuestions(id: any){
-        if(this.selectedQuiz == id)
-            return;
+    updateQuestionsCount() {
+        this.setTableRows();
+    }
 
-        this.selectedQuiz = id;
+    saveQuiz(obj) {
+        console.log(obj);
+
+        if (obj.id === -1) {
+            this.service.addQuiz(
+                {"name": obj.cells[0], "description": obj.cells[1]})
+                .subscribe(response => {
+                    console.log(response);
+                    this.updateQuestionsCount();
+                })
+        }
+        else {
+            this.service.updateQuiz(
+                {"id": obj.id, "name": obj.cells[0], "description": obj.cells[1]})
+                .subscribe(response => {
+                    console.log(response);
+                })
+        }
+    }
+
+    removeQuiz(obj) {
+        this.service.deleteQuiz(obj.id)
+            .subscribe(response => {
+                console.log(response);
+            });
+    }
+
+    setTableRows() {
+        this.service.getQuizzes().subscribe(response => {
+            var quizzes = response.json();
+
+            this.tableRowsWithId = [];
+
+            for (var i = 0; i < quizzes.length; i++) {
+                this.tableRowsWithId[i] =
+                    [quizzes[i]._id, quizzes[i].name,
+                        quizzes[i].description, quizzes[i].questions.length];
+            }
+        });
+    }
+
+    toggleQuestions(id: any) {
+        if (this.selectedQuiz == id)
+            this.selectedQuiz = 0;
+        else
+            this.selectedQuiz = id;
     }
 }

@@ -77,6 +77,24 @@ export class EditableTableService {
         this.isEditing.push(newRow);
     }
 
+    addRows(tableRows) {
+        let tableCells: TableCell[] = [];
+
+        if (tableRows.length > 0) {
+            for (const row of tableRows) {
+                var j = 0;
+                for (let i = 1; i < row.length; i++) {
+                    tableCells.push(
+                        new TableCell(row[i], this.isEditable[j]),
+                    );
+                    j++;
+                }
+                this.tableRowsObjects.push(new TableRow(tableCells, row[0]));
+                tableCells = [];
+            }
+        }
+    }
+
     editRow(selectedRow: TableRow) {
         this.isEditing.push(selectedRow);
     }

@@ -9,6 +9,8 @@ import {QuizzesRouting} from "./quizzes.routing";
 import {EditableTableModule} from '../editable-table/editable-table.module';
 import {QuestionsModule} from "../questions/questions.module";
 
+import {QuizService} from "./quiz.service";
+
 @NgModule({
     imports: [
         CommonModule,
@@ -17,6 +19,7 @@ import {QuestionsModule} from "../questions/questions.module";
         QuestionsModule,
         QuizzesRouting
     ],
+    providers: [QuizService],
     declarations: [MyQuizzesComponent, AllQuizzesComponent]
 })
 export class QuizzesModule {

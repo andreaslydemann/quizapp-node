@@ -50,11 +50,11 @@
                 <i class="{{saveIcon}}"></i>{{saveButtonLabel}}
             </button>
             <button class="btn btn-xs btn-danger" *ngIf="canDeleteRows && service.isEditing.indexOf(row) === -1"
-                    (click)="deleteRow(row)">
+                    (click)="deleteRowWithWarning(row)">
                 <i class="{{deleteIcon}}"></i>{{deleteButtonLabel}}
             </button>
             <button class="btn btn-xs btn-danger" *ngIf="!(service.isEditing.indexOf(row) == -1) && canEditRows"
-                    (click)="deleteRow(row)">
+                    (click)="deleteRowWithWarning(row)">
                 <i class="{{deleteIcon}}"></i>{{cancelButtonLabel}}
             </button>
             <button class="btn btn-xs btn-success" *ngIf="(service.isEditing.indexOf(row) === -1)

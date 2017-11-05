@@ -1,9 +1,4 @@
-<div>
-    <nv-editable-table [table-headers]="tableHeaders" [table-rows-with-id]="tableRowsWithId" [data-type]="dataType"
-                       class="ui table" [hide-extra-button]="true" [add-button-label]="question">
-    </nv-editable-table>
-</div>
-
-<div *ngFor="let question of questions">
-    {{question.id}}
-</div>
+<nv-editable-table [table-headers]="tableHeaders" [table-rows-with-id]="tableRowsWithId" [data-type]="dataType"
+                   class="ui table" [hide-extra-button]="true" [add-button-label]="questionLabel"
+                   (onRemove)="removeQuestion($event)" (onSave)="saveQuestion($event)">
+</nv-editable-table>

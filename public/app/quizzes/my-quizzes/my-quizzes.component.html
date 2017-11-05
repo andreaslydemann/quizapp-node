@@ -3,8 +3,11 @@
 </h3>
 
 <nv-editable-table [table-headers]="tableHeaders" [table-rows-with-id]="tableRowsWithId"
-                   [data-type]="dataType" [is-editable]="isEditable" [add-button-label]="quiz"
-                   [extra-button-label]="questions" (onExtraButtonClick)="showQuestions($event)">
+                   [data-type]="dataType" [is-editable]="isEditable" [add-button-label]="quizLabel"
+                   [extra-button-label]="questionsLabel" (onExtraButtonClick)="toggleQuestions($event)"
+                   (onRemove)="removeQuiz($event)" (onSave)="saveQuiz($event)">
 </nv-editable-table>
 
-<my-questions *ngIf="selectedQuiz" [quiz-id]="selectedQuiz"></my-questions>
+<my-questions *ngIf="selectedQuiz" [quiz-id]="selectedQuiz"
+              (onQuestionsUpdate)="updateQuestionsCount()">
+</my-questions>

@@ -1,3 +1,4 @@
+const Question = require('../models/question');
 const Quiz = require('../models/quiz');
 
 const timeout = process.env.API_DELAY;
@@ -17,7 +18,6 @@ function readQuizzes(req, res) {
     setTimeout(() => {
 
         Quiz.find({})
-            .populate('questions')
             .then((quizzes) => res.status(200).json(quizzes))
             .catch((err) => res.status(404).send())
 
@@ -38,7 +38,16 @@ function deleteQuiz(req, res) {
     setTimeout(() => {
 
         Quiz.findByIdAndRemove(req.params.id)
-            .then((quiz) => res.status(200).json(quiz))
+            .then((quiz) => {
+
+                for (var questionId of quiz.questions) {
+                    Question.findByIdAndRemove(questionId)
+                        .then((question) => res.status(200).json(question))
+                        .catch((err) => res.status(404).send())
+                }
+
+                res.status(200).json(quiz)
+            })
             .catch((err) => res.status(404).send())
 
     }, timeout)

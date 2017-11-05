@@ -1,7 +1,5 @@
-import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
-
+import {Component, OnInit, OnChanges, SimpleChanges, Input, Output, EventEmitter} from '@angular/core';
 import {TableRow} from '../shared/util/table-row';
-
 import {EditableTableService} from './editable-table.service';
 
 @Component({
@@ -10,7 +8,7 @@ import {EditableTableService} from './editable-table.service';
     styleUrls: ['./editable-table.component.css'],
     providers: [EditableTableService]
 })
-export class EditableTableComponent implements OnInit {
+export class EditableTableComponent implements OnInit, OnChanges {
 
     @Input('table-headers') tableHeaders: string[] = [];
     @Input('table-rows') tableRows: any[][] = [];
@@ -49,6 +47,7 @@ export class EditableTableComponent implements OnInit {
 
     @Output() onSave = new EventEmitter<any>();
     @Output() onRemove = new EventEmitter<any>();
+    @Output() onTableEmpty = new EventEmitter<any>();
     @Output() onExtraButtonClick = new EventEmitter<any>();
 
     service: EditableTableService;
@@ -62,6 +61,15 @@ export class EditableTableComponent implements OnInit {
             this.service.createTable(this.tableHeaders, this.tableRows, this.dataType, this.isEditable);
         } else if (this.tableRowsWithId.length > 0 || (this.tableRowsWithId !== undefined && this.tableRows.length === 0)) {
             this.service.createTableWithIds(this.tableHeaders, this.tableRowsWithId, this.dataType, this.isEditable);
+        }
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        if (!changes.tableRowsWithId.isFirstChange()) {
+            for (var row of this.service.tableRowsObjects)
+                this.deleteRow(row);
+            
+            this.service.addRows(this.tableRowsWithId)
         }
     }
 
@@ -94,21 +102,28 @@ export class EditableTableComponent implements OnInit {
         this.onSave.emit(obj);
     }
 
-    deleteRow(selectedRow: TableRow) {
+    deleteRowWithWarning(selectedRow: TableRow) {
         if (confirm("Are you sure you want to delete this?")) {
-            this.service.deleteRow(selectedRow);
-            const dir = [];
-
-            for (let i = 0; i < selectedRow.cells.length; i++) {
-                dir.push(selectedRow.cells[i].content);
-            }
-            const obj = {id: selectedRow.id, cells: dir};
+            const obj = this.deleteRow(selectedRow);
 
             this.onRemove.emit(obj);
+
+            if (this.service.tableRowsObjects.length == 0)
+                this.onTableEmpty.emit();
         }
     }
 
-    extraButtonClick(selectedRow: TableRow){
+    deleteRow(row: TableRow) {
+        this.service.deleteRow(row);
+        const dir = [];
+
+        for (let i = 0; i < row.cells.length; i++) {
+            dir.push(row.cells[i].content);
+        }
+        return {id: row.id, cells: dir};
+    }
+
+    extraButtonClick(selectedRow: TableRow) {
         this.onExtraButtonClick.emit(selectedRow.id);
     }
 }

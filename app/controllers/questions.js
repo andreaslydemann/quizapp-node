@@ -14,16 +14,40 @@ function createQuestion(req, res) {
     }, timeout)
 }
 
+function createQuestionOfQuiz(req, res) {
+    setTimeout(() => {
+
+        const question = new Question(req.body);
+        question.save()
+            .then((question) => {
+
+                Quiz.update({_id: req.params.id}, {$push: {questions: question}})
+                    .then((quiz) => res.status(200).json(quiz))
+                    .catch((err) => res.status(404).send())
+
+                res.status(201).json(question)
+            })
+            .catch((err) => res.status(400).send())
+
+    }, timeout)
+}
+
 function readQuestions(req, res) {
+    setTimeout(() => {
+
+        Question.find({})
+            .then((questions) => res.status(200).json(questions))
+            .catch((err) => res.status(404).send())
+
+    }, timeout)
+}
+
+function readQuestionsOfQuiz(req, res) {
     setTimeout(() => {
 
         Quiz.findById(req.params.id).select('questions -_id').populate('questions')
             .then((questions) => res.status(200).json(questions))
             .catch((err) => res.status(404).send())
-/*
-        Question.find({})
-            .then((questions) => res.status(200).json(questions))
-            .catch((err) => res.status(404).send())*/
 
     }, timeout)
 }
@@ -42,7 +66,15 @@ function deleteQuestion(req, res) {
     setTimeout(() => {
 
         Question.findByIdAndRemove(req.params.id)
-            .then((question) => res.status(200).json(question))
+            .then((question) => {
+
+                Quiz.update({questions: {"$in": [req.params.id]}},
+                    {$pullAll: {questions: [req.params.id]}}, {multi: true})
+                    .then((quiz) => res.status(200).json(quiz))
+                    .catch((err) => res.status(404).send())
+
+                res.status(200).json(question);
+            })
             .catch((err) => res.status(404).send())
 
     }, timeout)
@@ -50,7 +82,9 @@ function deleteQuestion(req, res) {
 
 module.exports = {
     createQuestion,
+    createQuestionOfQuiz,
     readQuestions,
+    readQuestionsOfQuiz,
     updateQuestion,
     deleteQuestion
 };
