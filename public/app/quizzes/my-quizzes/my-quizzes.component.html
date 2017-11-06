@@ -1,11 +1,12 @@
 <h3>
-    Quizzes
+    Start Your Own
 </h3>
 
 <nv-editable-table [table-headers]="tableHeaders" [table-rows-with-id]="tableRowsWithId"
                    [data-type]="dataType" [is-editable]="isEditable" [add-button-label]="quizLabel"
-                   [extra-button-label]="questionsLabel" (onExtraButtonClick)="toggleQuestions($event)"
-                   (onRemove)="removeQuiz($event)" (onSave)="saveQuiz($event)">
+                   [extra-button-label]="questionsLabel" [extra-button-count]="questionsCount"
+                   (onRemove)="removeQuiz($event)" (onSave)="saveQuiz($event)"
+                   (onExtraButtonClick)="toggleQuestions($event)">
 </nv-editable-table>
 
 <my-questions *ngIf="selectedQuiz" [quiz-id]="selectedQuiz"

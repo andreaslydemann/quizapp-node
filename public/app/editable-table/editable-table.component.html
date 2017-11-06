@@ -6,7 +6,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr class="{{trClass}}" *ngFor="let row of service.tableRowsObjects">
+    <tr class="{{trClass}}" *ngFor="let row of service.tableRowsObjects; let row_no = index">
         <td class="{{tdClass}}" *ngFor="let cell of row.cells">
                     <span *ngIf="service.isEditing.indexOf(row) === -1 && service.checkTypeOf(cell.content) !== 'boolean'">
                       {{cell.content.length > 90 ? (cell.content | slice:0:90) + '...' : cell.content}}
@@ -40,27 +40,30 @@
                 </div>
             </div>
         </td>
-        <td class={{buttonsTdClass}} *ngIf="canEditRows||canDeleteRows">
-            <button class="btn btn-xs btn-info" *ngIf="service.isEditing.indexOf(row) === -1 && canEditRows"
-                    (click)="editRow(row)">
-                <i class="{{editIcon}}"></i>{{editButtonLabel}}
-            </button>
-            <button class="btn btn-xs btn-info" *ngIf="!(service.isEditing.indexOf(row) == -1) && canEditRows"
-                    (click)="saveRow(row)">
-                <i class="{{saveIcon}}"></i>{{saveButtonLabel}}
-            </button>
-            <button class="btn btn-xs btn-danger" *ngIf="canDeleteRows && service.isEditing.indexOf(row) === -1"
-                    (click)="deleteRowWithWarning(row)">
-                <i class="{{deleteIcon}}"></i>{{deleteButtonLabel}}
-            </button>
-            <button class="btn btn-xs btn-danger" *ngIf="!(service.isEditing.indexOf(row) == -1) && canEditRows"
-                    (click)="deleteRowWithWarning(row)">
-                <i class="{{deleteIcon}}"></i>{{cancelButtonLabel}}
-            </button>
-            <button class="btn btn-xs btn-success" *ngIf="(service.isEditing.indexOf(row) === -1)
+        <td class="{{buttonsTdClass}} col-xs-2 " *ngIf="canEditRows||canDeleteRows">
+            <div class="pull-right">
+                <button class="btn btn-xs btn-success" *ngIf="(service.isEditing.indexOf(row) === -1)
             && canEditRows && !hideExtraButton" (click)="extraButtonClick(row)">
-                <i class="{{addIcon}}"></i> {{extraButtonLabel}}
-            </button>
+                    {{extraButtonLabel}}&nbsp;<span class="green pull-right">({{extraButtonCount[row_no]}})</span>
+                </button>
+                <button class="btn btn-xs btn-info" *ngIf="service.isEditing.indexOf(row) === -1 && canEditRows"
+                        (click)="editRow(row)">
+                    <i class="{{editIcon}}"></i>{{editButtonLabel}}
+                </button>
+                <button class="btn btn-xs btn-info" *ngIf="!(service.isEditing.indexOf(row) == -1) && canEditRows"
+                        (click)="saveRow(row)">
+                    <i class="{{saveIcon}}"></i>{{saveButtonLabel}}
+                </button>
+                <button class="btn btn-xs btn-danger" *ngIf="canDeleteRows && service.isEditing.indexOf(row) === -1"
+                        (click)="deleteRowWithWarning(row)">
+                    <i class="{{deleteIcon}}"></i>{{deleteButtonLabel}}
+                </button>
+                <button class="btn btn-xs btn-danger pull-right"
+                        *ngIf="!(service.isEditing.indexOf(row) == -1) && canEditRows"
+                        (click)="deleteRowWithWarning(row)">
+                    <i class="{{deleteIcon}}"></i>{{cancelButtonLabel}}
+                </button>
+            </div>
         </td>
     </tr>
     </tbody>

@@ -1,4 +1,53 @@
 /* You can add global styles to this file, and also import other style files */
-#removeTextDecoration{
-    text-decoration: none;
+.ui.table {
+     font-family: Verdana, Geneva, Tahoma, sans-serif;
+ }
+
+.myerror {
+    color: red
+}
+
+.requiredInput.divmessage {
+    display: none
+}
+
+.requiredInput.divmessage.show {
+    display: block !important
+}
+
+.requiredInput.divmessage.hide {
+    display: none
+}
+
+.table-bordered > thead > tr > th,
+.table-bordered > tbody > tr > td,
+.table-bordered > tfoot > tr > th{
+    border-left: 0 !important;
+    border-right: 0 !important;
+}
+
+tfoot, thead {
+    background-color: #f9fafb;
+}
+
+span.circle-green {
+     background: #18bc9c;
+     border-radius: 0.8em;
+     -moz-border-radius: 0.8em;
+     -webkit-border-radius: 0.8em;
+     color: #ffffff;
+     display: inline-block;
+     font-weight: bold;
+     font-size: 13px;
+     line-height: 1.6em;
+     margin-right: 15px;
+     text-align: center;
+     width: 1.6em;
+ }
+
+span.green {
+    color: #ffffff;
+    display: inline-block;
+    font-weight: bold;
+    font-size: 13px;
 }

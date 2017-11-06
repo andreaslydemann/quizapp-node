@@ -7,15 +7,15 @@ import {QuizService} from "../quiz.service";
     styleUrls: ['./my-quizzes.component.css']
 })
 export class MyQuizzesComponent implements OnInit {
-    quizzes: any[];
     quizLabel = "Quiz";
     questionsLabel = "Questions";
     selectedQuiz: number = 0;
 
     tableRowsWithId: any[][] = [];
-    tableHeaders = ['Name', 'Description', 'Question Count'];
-    dataType = ['string', 'string', 'number'];
+    tableHeaders = ['Name', 'Description'];
+    dataType = ['string', 'string'];
     isEditable = [true, true, false];
+    questionsCount = [];
 
     constructor(private service: QuizService) {
     }
@@ -60,11 +60,14 @@ export class MyQuizzesComponent implements OnInit {
             var quizzes = response.json();
 
             this.tableRowsWithId = [];
+            this.questionsCount = [];
 
             for (var i = 0; i < quizzes.length; i++) {
                 this.tableRowsWithId[i] =
                     [quizzes[i]._id, quizzes[i].name,
-                        quizzes[i].description, quizzes[i].questions.length];
+                        quizzes[i].description];
+
+                this.questionsCount.push(quizzes[i].questions.length);
             }
         });
     }

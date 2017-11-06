@@ -40,6 +40,7 @@ export class EditableTableComponent implements OnInit, OnChanges {
     @Input('class') class: string;
     @Input('data-type') dataType = [];
     @Input('is-editable') isEditable = [];
+    @Input('extra-button-count') extraButtonCount = [];
 
     @Input() errorClass = 'myerror';
     @Input() isRequired = true;

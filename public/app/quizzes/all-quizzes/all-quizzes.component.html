@@ -1,3 +1,31 @@
-<p>
-    all-quizzes works!
-</p>
+<h3>
+    Quizzes
+</h3>
+
+
+<table class="ui table table-bordered">
+
+    <thead>
+    <tr>
+        <th class="col-xs-4">Name</th>
+        <th class="col-xs-6">Description</th>
+        <th class="col-xs-2"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let quiz of quizzes">
+        <td>{{ quiz.name }}</td>
+        <td>{{ quiz.description }}</td>
+        <td><span class="circle-green pull-right">{{ quiz.questions.length }}</span></td>
+    </tr>
+    </tbody>
+    <tfoot>
+    <tr>
+        <th></th>
+        <th></th>
+        <th class="col-xs-3">
+            <button class="btn btn-xs btn-default pull-right">Start</button>
+        </th>
+    </tr>
+    </tfoot>
+</table>
