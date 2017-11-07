@@ -18,6 +18,10 @@
                 <li><a routerLink="all-quizzes" routerLinkActive="active-link">Quizzes</a></li>
                 <li><a routerLink="my-quizzes" routerLinkActive="active-link">Start Your Own</a></li>
             </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a *ngIf="true">Login</a>
+                    <a *ngIf="false">Logout</a></li>
+            </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>

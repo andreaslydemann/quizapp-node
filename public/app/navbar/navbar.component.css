@@ -2,3 +2,7 @@
     color: #ffffff;
     background-color: #1a242f !important;
 }
+
+.login-element {
+    cursor: pointer;
+}
