@@ -6,3 +6,7 @@
 .login-element {
     cursor: pointer;
 }
+
+#navbar {
+    padding-left: 0px;
+}
